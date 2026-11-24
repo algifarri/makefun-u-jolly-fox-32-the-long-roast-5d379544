@@ -23,11 +23,16 @@ TEXT = (
 )
 
 
-def main() -> None:
+def validate(text: str) -> None:
     # The gate requires 1-200 characters of UTF-8 text, not only whitespace.
-    assert 1 <= len(TEXT) <= 200, "entry must be 1-200 characters"
-    assert TEXT.strip() == TEXT, "entry must not start or end with whitespace"
-    assert "\n" not in TEXT, "entry must be exactly one line"
+    assert 1 <= len(text) <= 200, "entry must be 1-200 characters"
+    assert text.strip() == text, "entry must not start or end with whitespace"
+    assert "\n" not in text, "entry must be exactly one line"
+    assert text.strip(), "entry must not be whitespace only"
+
+
+def main() -> None:
+    validate(TEXT)
     # The grader mounts /output; create it defensively for local runs too.
     out_dir = "/output"
     os.makedirs(out_dir, exist_ok=True)
